@@ -44,12 +44,12 @@
                         without a single error or failure!
                     </h3>
 </div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="test invocar servicio consumer">
+<div class="testcase clearfix success grid_8 alpha omega" data-name="test obtener datos en json de los items">
 <div class="grid_3 alpha">
 <p>
-<span class="icon success"></span><b class="testname message success">test invocar servicio consumer</b>
+<span class="icon success"></span><b class="testname message success">test obtener datos en json de los items</b>
 </p>
-<p class="summary">Executed in 29.656 seconds.</p>
+<p class="summary">Executed in 2.984 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -57,166 +57,12 @@
 <div class="clearfix output footer">
 <div class="sysout">
 <h2>Standard output</h2>
-<pre class="stdout">--Output from test invocar servicio consumer--
-Hibernate: select max(id) from items
-Hibernate: select max(id) from NonMPPaymentMethods
-Proceso Bien
-Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-YA LLEGAMOS ACAMLM
-Hibernate: select * from ( select this_.id as id1_1_0_, this_.acepta_mp as acepta_mp2_1_0_, this_.iditem as iditem3_1_0_, this_.permalink as permalink4_1_0_, this_.site_id as site_id5_1_0_, this_.title as title6_1_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
-YA LLEGAMOS y aca tb
-site_id: MLM
-Proceso Bien
-Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
-YA LLEGAMOS ACAMLB
-Hibernate: select * from ( select this_.id as id1_1_0_, this_.acepta_mp as acepta_mp2_1_0_, this_.iditem as iditem3_1_0_, this_.permalink as permalink4_1_0_, this_.site_id as site_id5_1_0_, this_.title as title6_1_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
-YA LLEGAMOS y aca tb
-site_id: MLB
-Proceso Bien
-Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
-YA LLEGAMOS ACAMLB
-Hibernate: select * from ( select this_.id as id1_1_0_, this_.acepta_mp as acepta_mp2_1_0_, this_.iditem as iditem3_1_0_, this_.permalink as permalink4_1_0_, this_.site_id as site_id5_1_0_, this_.title as title6_1_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
-YA LLEGAMOS y aca tb
-site_id: MLB
-Proceso Bien
-Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
-YA LLEGAMOS ACAMLB
-Hibernate: select * from ( select this_.id as id1_1_0_, this_.acepta_mp as acepta_mp2_1_0_, this_.iditem as iditem3_1_0_, this_.permalink as permalink4_1_0_, this_.site_id as site_id5_1_0_, this_.title as title6_1_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
-YA LLEGAMOS y aca tb
-site_id: MLB
-Proceso Bien
-Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-YA LLEGAMOS ACAMLA
-Hibernate: select * from ( select this_.id as id1_1_0_, this_.acepta_mp as acepta_mp2_1_0_, this_.iditem as iditem3_1_0_, this_.permalink as permalink4_1_0_, this_.site_id as site_id5_1_0_, this_.title as title6_1_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
-YA LLEGAMOS y aca tb
-site_id: MLA
-Proceso Bien
-Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-YA LLEGAMOS ACAMLM
-Hibernate: select * from ( select this_.id as id1_1_0_, this_.acepta_mp as acepta_mp2_1_0_, this_.iditem as iditem3_1_0_, this_.permalink as permalink4_1_0_, this_.site_id as site_id5_1_0_, this_.title as title6_1_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
-YA LLEGAMOS y aca tb
-site_id: MLM
-Proceso Bien
-Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
-YA LLEGAMOS ACAMLB
-Hibernate: select * from ( select this_.id as id1_1_0_, this_.acepta_mp as acepta_mp2_1_0_, this_.iditem as iditem3_1_0_, this_.permalink as permalink4_1_0_, this_.site_id as site_id5_1_0_, this_.title as title6_1_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
-YA LLEGAMOS y aca tb
-site_id: MLB
-Proceso Bien
-Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-YA LLEGAMOS ACAMLM
-Hibernate: select * from ( select this_.id as id1_1_0_, this_.acepta_mp as acepta_mp2_1_0_, this_.iditem as iditem3_1_0_, this_.permalink as permalink4_1_0_, this_.site_id as site_id5_1_0_, this_.title as title6_1_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
-YA LLEGAMOS y aca tb
-site_id: MLM
-Proceso Bien
-Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-YA LLEGAMOS ACAMLM
-Hibernate: select * from ( select this_.id as id1_1_0_, this_.acepta_mp as acepta_mp2_1_0_, this_.iditem as iditem3_1_0_, this_.permalink as permalink4_1_0_, this_.site_id as site_id5_1_0_, this_.title as title6_1_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
-YA LLEGAMOS y aca tb
-site_id: MLM
-Proceso Bien
-Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-YA LLEGAMOS ACAMLA
-Hibernate: select * from ( select this_.id as id1_1_0_, this_.acepta_mp as acepta_mp2_1_0_, this_.iditem as iditem3_1_0_, this_.permalink as permalink4_1_0_, this_.site_id as site_id5_1_0_, this_.title as title6_1_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
-YA LLEGAMOS y aca tb
-site_id: MLA
-Proceso Bien
-Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-YA LLEGAMOS ACAMLB
-Hibernate: select * from ( select this_.id as id1_1_0_, this_.acepta_mp as acepta_mp2_1_0_, this_.iditem as iditem3_1_0_, this_.permalink as permalink4_1_0_, this_.site_id as site_id5_1_0_, this_.title as title6_1_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
-YA LLEGAMOS y aca tb
-site_id: MLB
-Proceso Bien
-Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-YA LLEGAMOS ACAMLM
-Hibernate: select * from ( select this_.id as id1_1_0_, this_.acepta_mp as acepta_mp2_1_0_, this_.iditem as iditem3_1_0_, this_.permalink as permalink4_1_0_, this_.site_id as site_id5_1_0_, this_.title as title6_1_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
-YA LLEGAMOS y aca tb
-site_id: MLM
-Proceso Bien
-Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-YA LLEGAMOS ACAMLM
-Hibernate: select * from ( select this_.id as id1_1_0_, this_.acepta_mp as acepta_mp2_1_0_, this_.iditem as iditem3_1_0_, this_.permalink as permalink4_1_0_, this_.site_id as site_id5_1_0_, this_.title as title6_1_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
-YA LLEGAMOS y aca tb
-site_id: MLM
-Proceso Bien
-Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-YA LLEGAMOS ACAMLM
-Hibernate: select * from ( select this_.id as id1_1_0_, this_.acepta_mp as acepta_mp2_1_0_, this_.iditem as iditem3_1_0_, this_.permalink as permalink4_1_0_, this_.site_id as site_id5_1_0_, this_.title as title6_1_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
-YA LLEGAMOS y aca tb
-site_id: MLM
-Proceso Bien
-Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-YA LLEGAMOS ACAMLA
-Hibernate: select * from ( select this_.id as id1_1_0_, this_.acepta_mp as acepta_mp2_1_0_, this_.iditem as iditem3_1_0_, this_.permalink as permalink4_1_0_, this_.site_id as site_id5_1_0_, this_.title as title6_1_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
-YA LLEGAMOS y aca tb
-site_id: MLA
-Proceso Bien
-Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
-YA LLEGAMOS ACAMLB
-Hibernate: select * from ( select this_.id as id1_1_0_, this_.acepta_mp as acepta_mp2_1_0_, this_.iditem as iditem3_1_0_, this_.permalink as permalink4_1_0_, this_.site_id as site_id5_1_0_, this_.title as title6_1_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
-YA LLEGAMOS y aca tb
-site_id: MLB
-Proceso Bien
-Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
-YA LLEGAMOS ACAMLM
-Hibernate: select * from ( select this_.id as id1_1_0_, this_.acepta_mp as acepta_mp2_1_0_, this_.iditem as iditem3_1_0_, this_.permalink as permalink4_1_0_, this_.site_id as site_id5_1_0_, this_.title as title6_1_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
-YA LLEGAMOS y aca tb
-site_id: MLM
-Proceso Bien
-Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
-YA LLEGAMOS ACAMLB
-Hibernate: select * from ( select this_.id as id1_1_0_, this_.acepta_mp as acepta_mp2_1_0_, this_.iditem as iditem3_1_0_, this_.permalink as permalink4_1_0_, this_.site_id as site_id5_1_0_, this_.title as title6_1_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
-YA LLEGAMOS y aca tb
-site_id: MLB
-Proceso Bien
-Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
-YA LLEGAMOS ACAMLA
-Hibernate: select * from ( select this_.id as id1_1_0_, this_.acepta_mp as acepta_mp2_1_0_, this_.iditem as iditem3_1_0_, this_.permalink as permalink4_1_0_, this_.site_id as site_id5_1_0_, this_.title as title6_1_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
-YA LLEGAMOS y aca tb
-site_id: MLA
-y por aca estamos
+<pre class="stdout">--Output from test obtener datos en json de los items--
 </pre>
 </div>
 <div class="syserr">
 <h2>System error</h2>
-<pre class="syserr">--Output from test invocar servicio consumer--
+<pre class="syserr">--Output from test obtener datos en json de los items--
 </pre>
 </div>
 </div>

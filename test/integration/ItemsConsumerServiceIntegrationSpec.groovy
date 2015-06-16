@@ -13,16 +13,10 @@ class ItemsConsumerServiceIntegrationSpec extends IntegrationSpec {
 
     void "test obtener datos en json de los items"(){
         given:
-        def result1 = "MLM"
-        def result2 = "MLB"
-        def item1  = "MLM490230572"
-        def item2 = "MLB657379875"
 
         when:
-
         //llamar metodo que devuelve un json por cada itemid
-        def valueReturned = itemsConsumerService.obtenerJson(item1)
-        def valueReturned2 = itemsConsumerService.obtenerJson(item2)
+        def valueReturned = itemsConsumerService.obtenerJson(item)
 
         //guardar datos de respuesta en json
         //obtener campos del json
@@ -30,8 +24,12 @@ class ItemsConsumerServiceIntegrationSpec extends IntegrationSpec {
 
         then:
         //debe devolver una lista cargada con los campos que contiene el json
-        assert valueReturned.site_id.equals(result1)
-        assert valueReturned2.site_id.equals(result2)
+        assert valueReturned.site_id.equals(result)
+
+        where:
+        result | item
+        "MLM" | "MLM490230572"
+        "MLB" | "MLB657379875"
 
     }
 
@@ -40,28 +38,59 @@ class ItemsConsumerServiceIntegrationSpec extends IntegrationSpec {
     void "test guardar en tabla los datos del json"(){
 
         given:
-        //simular lista con los datos del json
-        def mapaItems = [iditem: "MLB657379875",site_id: "MLB", title: "Sela Coqueluxe ( Ideal Para Marcha ) Inox", permalink: "http://produto.mercadolivre.com.br/MLB-657379875-sela-coqueluxe-ideal-para-marcha-inox-_JM", acepta_mp: "true", non_mercado_pago_payment_methods: [[id: "MLMWC", description: "Acordar con el comprador", type: "G"],[id: "MLMMO", description: "Efectivo", type: "G"]]]
 
         when:
         itemsConsumerService.guardarEnBase(mapaItems)
-        def valueReturned = itemsConsumerService.consultarBase(mapaItems.iditem)
 
         then:
-        assert valueReturned.equals("MLB")
+        def result = itemsConsumerService.consultarBase(mapaItems.iditem)
+        assert result == site
+
+        where:
+        //probar con datos errones para que falle un registro de la tabla hijo y no grabe en padre tampoco
+        //probar con datos correctos para que inserte padre y los dos hijos
+        //probar con datos errones en padre para que no inserte nada
+
+        mapaItems | site
+        [iditem: "MLB657379875",site_id: "MLB", title: "Sela Coqueluxe ( Ideal Para Marcha ) Inox", permalink: "http://produto.mercadolivre.com.br/MLB-657379875-sela-coqueluxe-ideal-para-marcha-inox-_JM", acepta_mp: "true", non_mercado_pago_payment_methods: [[id: "MLMWC", description: "Acordar con el comprador", type: "G"],[id: "MLMMO", description: "Efectivo", type: "G123456789"]]] | "MLB"
+        [iditem: "MLB657379876",site_id: "MLB", title: "Sela Coqueluxe ( Ideal Para Marcha ) Inox", permalink: "http://produto.mercadolivre.com.br/MLB-657379875-sela-coqueluxe-ideal-para-marcha-inox-_JM", acepta_mp: "true", non_mercado_pago_payment_methods: [[id: "MLMWC", description: "Acordar con el comprador", type: "G"],[id: "MLMMO", description: "Efectivo", type: "G"]]] | "MLB"
+        [iditem: "MLB657379877",site_id: "MLB", title: "Sela Coqueluxe ( Ideal Para Marcha ) Inox", permalink: "http://produto.mercadolivre.com.br/MLB-657379875-sela-coqueluxe-ideal-para-marcha-inox-_JM", acepta_mp: "1234567890123456789012234567890", non_mercado_pago_payment_methods: [[id: "MLMWC", description: "Acordar con el comprador", type: "G"],[id: "MLMMO", description: "Efectivo", type: "G123456789"]]] | "MLB"
+
     }
 
-    void "test invocar servicio consumer"(){
+    void "test invocar servicio consumer utilizando datos del boostrap"(){
 
         given:
-        def result = "MLM496221059"
-        def a = "a"
-        def b = "a"
+        def iditems = ""
+        def valor = "MLM496221059"
+        def site = "MLM"
 
         when:
-        itemsConsumerService.executeProcesMessaje(result)
+        itemsConsumerService.executeProcesMessaje(iditems)
+
         then:
-        assert a == b
+        def result = itemsConsumerService.consultarBase(valor)
+        assert result == site
+
+    }
+
+    void "test invocar servicio consumer con id"(){
+
+        given:
+
+        when:
+        //def result = valor// "MLM496221059,MLM490230561"
+        itemsConsumerService.executeProcesMessaje(valor)
+
+        then:
+        def result = itemsConsumerService.consultarBase(valor)
+        assert result == site
+
+        where:
+        valor | site
+        "MLM496221059" | "MLM"
+        "MLB658976766" | "MLB"
+
     }
 
 }

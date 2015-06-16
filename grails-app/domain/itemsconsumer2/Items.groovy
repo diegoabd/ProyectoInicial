@@ -8,7 +8,7 @@ class Items {
     String  site_id
     String  title
     String  permalink
-    String acepta_mp
+    String  acepta_mp
 
     static constraints = {
     }

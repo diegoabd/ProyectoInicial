@@ -20,22 +20,20 @@ class ItemsConsumerService{
     public void executeProcesMessaje(def result)
     {
         def items
-        def listaItems
-        def Json
 
         //obtener items del redis, ya separados por coma en una lista.
-        items = splitDatos(getRedistItems(),delimitador)
+        if (result == "") {
+            items = splitDatos(getRedistItems(), delimitador)
+        }else{
+            items = splitDatos(result,delimitador)
+        }
 
         items.each{
-
             //ejecutar curl
             //manipular json
-
             def mapaItems = obtenerJson(it)
+            //guardar en tablas Items y nonMpPaymentMethods
             guardarEnBase(mapaItems)
-
-           // def site_id = consultarBase(mapaItems.iditem)
-
         }
 
     }
@@ -61,8 +59,10 @@ class ItemsConsumerService{
     }
 
     public def obtenerJson(String idItem){
+
         def json = itemsClient.getItem(idItem)
-        def mapaItems = [iditem: json.id,site_id: json.site_id, title: json.title, permalink: json.permalink, acepta_mp: json.accepts_mercadopago,non_mercado_pago_payment_methods: json.non_mercado_pago_payment_methods ]
+
+        def mapaItems = [iditem: json.id,site_id: json.site_id, title: json.title, permalink: json.permalink, acepta_mp: json.accepts_mercadopago,non_mercado_pago_payment_methods: json.non_mercado_pago_payment_methods]
 
         return mapaItems
     }
@@ -76,23 +76,23 @@ class ItemsConsumerService{
                 try{
                     itemsRepository.saveItems(mapaItems)
                 }catch(Throwable e){
-                    println("posible error")
-                    log.info "processed error"
+                    log.info "Processed error"
                     savedException = e
                     tx.setRollbackOnly()
                 }
             }
         } finally {
             if(savedException){
-                println("error")
+                println("Error en carga de datos: " + mapaItems.iditem)
              }else{
-                println("Proceso Bien")
-                log.info "processed correctly"
+                println("Proceso Bien. IdItem: " + mapaItems.iditem)
+                log.info "Processed correctly"
                 }
             }
     }
 
     public def consultarBase(String iditem){
+
         //validacion segun el resultado del guardado en la base
         Items item = itemsRepository.getItems(iditem)
         //println("item en base: $item")
