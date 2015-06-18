@@ -19,7 +19,7 @@ class ItemsRepository {
     public void saveItems(def itemMapa) {
         def item = new itemsconsumer2.Items(iditem: itemMapa.iditem, site_id: itemMapa.site_id, title: itemMapa.title, permalink: itemMapa.permalink, acepta_mp: itemMapa.acepta_mp)
 
-        item.save(failOnError: true)
+        item.save(failOnError: true, flush: true)
 
         itemMapa.non_mercado_pago_payment_methods.each{
             saveNonMPPaymentMethods(it,itemMapa.iditem)
@@ -29,8 +29,13 @@ class ItemsRepository {
     public void saveNonMPPaymentMethods(def nonMPMapa,def iditem) {
         def nonMPPayMet = new itemsconsumer2.NonMPPaymentMethods(idnonmp: nonMPMapa.id, iditem: iditem, description: nonMPMapa.description, type: nonMPMapa.type)
 
-        nonMPPayMet.save(failOnError: true)
+        nonMPPayMet.save(failOnError: true, flush: true)
     }
 
+    public void saveError(def error){
+        def log = new  itemsconsumer2.Logs(iditem: error.iditem, description: error.description, fecha: error.fecha)
+
+        log.save(failOnError: true, flush: true)
+    }
 
 }

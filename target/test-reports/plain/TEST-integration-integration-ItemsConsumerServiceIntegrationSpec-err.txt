@@ -1,1 +1,1 @@
---Output from test obtener datos en json de los items--
+--Output from test guardar en tabla los datos del json y que de ERROR al guardar en tabla HIJA y realice el rollback--

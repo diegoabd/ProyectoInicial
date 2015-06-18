@@ -5,7 +5,7 @@ class BootStrap {
 
     def init = { servletContext ->
 
-      /*  def keys = "ITEMS_LIST"
+        def keys = "ITEMS_LIST"
 
         println("Cargando Base: ")
 
@@ -38,7 +38,7 @@ class BootStrap {
         listaItems.each {
             println it
         }
-*/
+
 
     }
     def destroy = {

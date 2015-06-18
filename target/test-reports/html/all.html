@@ -48,12 +48,12 @@
                         without a single error or failure!
                     </h3>
 </div>
-<div class="testcase clearfix success grid_8 alpha omega" data-name="test obtener datos en json de los items">
+<div class="testcase clearfix success grid_8 alpha omega" data-name="test guardar en tabla los datos del json y que de ERROR al guardar en tabla HIJA y realice el rollback">
 <div class="grid_3 alpha">
 <p>
-<span class="icon success"></span><b class="testname message success">test obtener datos en json de los items</b>
+<span class="icon success"></span><b class="testname message success">test guardar en tabla los datos del json y que de ERROR al guardar en tabla HIJA y realice el rollback</b>
 </p>
-<p class="summary">Executed in 2.984 seconds.</p>
+<p class="summary">Executed in 0.728 seconds.</p>
 </div>
 <div class="grid_5 omega outputinfo"></div>
 <div class="clear"></div>
@@ -61,12 +61,21 @@
 <div class="clearfix output footer">
 <div class="sysout">
 <h2>Standard output</h2>
-<pre class="stdout">--Output from test obtener datos en json de los items--
+<pre class="stdout">--Output from test guardar en tabla los datos del json y que de ERROR al guardar en tabla HIJA y realice el rollback--
+Hibernate: select max(id) from items
+Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
+Hibernate: select max(id) from NonMPPaymentMethods
+Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
+Error en carga de datos: MLB657379875
+Hibernate: select * from ( select this_.id as id1_2_0_, this_.acepta_mp as acepta_mp2_2_0_, this_.iditem as iditem3_2_0_, this_.permalink as permalink4_2_0_, this_.site_id as site_id5_2_0_, this_.title as title6_2_0_ from items this_ where this_.iditem=? ) where rownum &lt;= ?
+Hibernate: select max(id) from Logs
+Hibernate: insert into Logs (description, fecha, iditem, id) values (?, ?, ?, ?)
 </pre>
 </div>
 <div class="syserr">
 <h2>System error</h2>
-<pre class="syserr">--Output from test obtener datos en json de los items--
+<pre class="syserr">--Output from test guardar en tabla los datos del json y que de ERROR al guardar en tabla HIJA y realice el rollback--
 </pre>
 </div>
 </div>

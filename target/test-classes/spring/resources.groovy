@@ -4,10 +4,11 @@ import com.mercadolibre.opensource.frameworks.restclient.SimpleRestClient
 import itemsconsumer2.ItemsConsumerService
 import mercadolibre.ItemsRepository
 import mercadolibre.RESTItemClient
+import mercadolibre.RedisMananger
 
 beans = {
 
-    restClient(SimpleRestClient){ bean ->
+    restClient(SimpleRestClient){bean ->
         name= "prod Rest client"
         baseUrl= "https://api.mercadolibre.com"
         bean.initMethod= "init"
@@ -18,12 +19,17 @@ beans = {
     itemsClient(RESTItemClient){
         restClient = ref('restClient')
     }
+
     itemsRepository(ItemsRepository){
+    }
+
+    redisMananger(RedisMananger){
     }
 
     itemsConsumerService(ItemsConsumerService){
         itemsClient = ref('itemsClient')
         itemsRepository= ref('itemsRepository')
+        redisMananger = ref('redisMananger')
     }
 
     itemsConsumerServiceJob(ItemsConsumerServiceJob){

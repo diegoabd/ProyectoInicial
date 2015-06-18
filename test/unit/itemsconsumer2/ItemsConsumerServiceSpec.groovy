@@ -36,15 +36,15 @@ class ItemsConsumerServiceSpec extends IntegrationSpec {
             //setear objeto con datos de la base
             jedis.set(idService, result)
             //simular conexion
-            def servicio = [initializeJedis:{true}] as ItemsConsumerService
+            def servicio = [] as ItemsConsumerService
             servicio.idListJedisToConnect = idService
             //servicio.whereToConnectJedis = "localhost"
             //cargar el objeto jedis del servicio con el objeto jedis (mockeado) del test
-            servicio.jedis = jedis
+            servicio.redisMananger = jedis
 
         when:
             //ejecutar metodo que obtiene datos de la base redis
-            def valueReturned = servicio.getRedistItems()
+            def valueReturned = servicio.redis.getRedistItems()
 
         then:
             //debe devolver los datos previamente cargados
@@ -82,7 +82,7 @@ class ItemsConsumerServiceSpec extends IntegrationSpec {
 
         when:
         //ejecutar metodo que envia los datos del redis al array para splitearlos por la coma
-        def valueReturned = servicio.splitDatos(result, delimitador)
+        def valueReturned = servicio.splitData(result, delimitador)
 
         then:
         //debe devolver los datos previamente cargados

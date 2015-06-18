@@ -16,7 +16,7 @@ class ItemsConsumerServiceIntegrationSpec extends IntegrationSpec {
 
         when:
         //llamar metodo que devuelve un json por cada itemid
-        def valueReturned = itemsConsumerService.obtenerJson(item)
+        def valueReturned = itemsConsumerService.getJson(item)
 
         //guardar datos de respuesta en json
         //obtener campos del json
@@ -30,32 +30,56 @@ class ItemsConsumerServiceIntegrationSpec extends IntegrationSpec {
         result | item
         "MLM" | "MLM490230572"
         "MLB" | "MLB657379875"
-
     }
 
 
-
-    void "test guardar en tabla los datos del json"(){
+    void "test guardar en tabla los datos del json y que guarde ok"(){
 
         given:
 
         when:
-        itemsConsumerService.guardarEnBase(mapaItems)
+        def resp = itemsConsumerService.saveBase(mapaItems)
 
         then:
-        def result = itemsConsumerService.consultarBase(mapaItems.iditem)
-        assert result == site
+        def result = itemsConsumerService.getBase(mapaItems.iditem)
+        assert result.site_id == site
+        where:
+        mapaItems | site
+        [iditem: "MLB657379876",site_id: "MLB", title: "Sela Coqueluxe ( Ideal Para Marcha ) Inox", permalink: "http://produto.mercadolivre.com.br/MLB-657379875-sela-coqueluxe-ideal-para-marcha-inox-_JM", acepta_mp: "true", non_mercado_pago_payment_methods: [[id: "MLMWC", description: "Acordar con el comprador", type: "G"],[id: "MLMMO", description: "Efectivo", type: "G"]]] | "MLB"
+    }
+
+    void "test guardar en tabla los datos del json y que de ERROR al guardar en tabla PADRE y realice el rollback"(){
+
+        given:
+
+        when:
+        def resp = itemsConsumerService.saveBase(mapaItems)
+
+        then:
+        def result = itemsConsumerService.getBase(mapaItems.iditem)
+        assert result == null
 
         where:
-        //probar con datos errones para que falle un registro de la tabla hijo y no grabe en padre tampoco
-        //probar con datos correctos para que inserte padre y los dos hijos
-        //probar con datos errones en padre para que no inserte nada
+        mapaItems | site
+        [iditem: "MLB657379877",site_id: "MLB", title: "Sela Coqueluxe ( Ideal Para Marcha ) Inox", permalink: "http://produto.mercadolivre.com.br/MLB-657379875-sela-coqueluxe-ideal-para-marcha-inox-_JM", acepta_mp: "1234567890123456789012234567890", non_mercado_pago_payment_methods: [[id: "MLMWC", description: "Acordar con el comprador", type: "G"],[id: "MLMMO", description: "Efectivo", type: "G"]]] | "MLB"
+    }
 
+
+    void "test guardar en tabla los datos del json y que de ERROR al guardar en tabla HIJA y realice el rollback"(){
+
+        given:
+
+        when:
+        def resp = itemsConsumerService.saveBase(mapaItems)
+        then:
+        def result = itemsConsumerService.getBase(mapaItems.iditem)
+        def error = [iditem: mapaItems.iditem, description: "aaa", fecha: "01/01/2010"]
+        itemsConsumerService.saveError(error)
+        assert result == null
+
+        where:
         mapaItems | site
         [iditem: "MLB657379875",site_id: "MLB", title: "Sela Coqueluxe ( Ideal Para Marcha ) Inox", permalink: "http://produto.mercadolivre.com.br/MLB-657379875-sela-coqueluxe-ideal-para-marcha-inox-_JM", acepta_mp: "true", non_mercado_pago_payment_methods: [[id: "MLMWC", description: "Acordar con el comprador", type: "G"],[id: "MLMMO", description: "Efectivo", type: "G123456789"]]] | "MLB"
-        [iditem: "MLB657379876",site_id: "MLB", title: "Sela Coqueluxe ( Ideal Para Marcha ) Inox", permalink: "http://produto.mercadolivre.com.br/MLB-657379875-sela-coqueluxe-ideal-para-marcha-inox-_JM", acepta_mp: "true", non_mercado_pago_payment_methods: [[id: "MLMWC", description: "Acordar con el comprador", type: "G"],[id: "MLMMO", description: "Efectivo", type: "G"]]] | "MLB"
-        [iditem: "MLB657379877",site_id: "MLB", title: "Sela Coqueluxe ( Ideal Para Marcha ) Inox", permalink: "http://produto.mercadolivre.com.br/MLB-657379875-sela-coqueluxe-ideal-para-marcha-inox-_JM", acepta_mp: "1234567890123456789012234567890", non_mercado_pago_payment_methods: [[id: "MLMWC", description: "Acordar con el comprador", type: "G"],[id: "MLMMO", description: "Efectivo", type: "G123456789"]]] | "MLB"
-
     }
 
     void "test invocar servicio consumer utilizando datos del boostrap"(){
@@ -69,8 +93,8 @@ class ItemsConsumerServiceIntegrationSpec extends IntegrationSpec {
         itemsConsumerService.executeProcesMessaje(iditems)
 
         then:
-        def result = itemsConsumerService.consultarBase(valor)
-        assert result == site
+        def result = itemsConsumerService.getBase(valor)
+        assert result.site_id == site
 
     }
 
@@ -83,8 +107,8 @@ class ItemsConsumerServiceIntegrationSpec extends IntegrationSpec {
         itemsConsumerService.executeProcesMessaje(valor)
 
         then:
-        def result = itemsConsumerService.consultarBase(valor)
-        assert result == site
+        def result = itemsConsumerService.getBase(valor)
+        assert result.site_id == site
 
         where:
         valor | site

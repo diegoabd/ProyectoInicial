@@ -1,14 +1,23 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <testsuites>
-  <testsuite errors="0" failures="0" hostname="ARAR-dabdala-2.local" id="0" name="ItemsConsumerServiceIntegrationSpec" package="" tests="1" time="2.986" timestamp="2015-06-15T20:37:56">
+  <testsuite errors="0" failures="0" hostname="ARAR-dabdala-2.local" id="0" name="ItemsConsumerServiceIntegrationSpec" package="" tests="1" time="0.73" timestamp="2015-06-18T21:10:47">
       <properties />
 
-      <testcase classname="ItemsConsumerServiceIntegrationSpec" name="test obtener datos en json de los items" time="2.984" />
+      <testcase classname="ItemsConsumerServiceIntegrationSpec" name="test guardar en tabla los datos del json y que de ERROR al guardar en tabla HIJA y realice el rollback" time="0.728" />
 
-      <system-out><![CDATA[--Output from test obtener datos en json de los items--
+      <system-out><![CDATA[--Output from test guardar en tabla los datos del json y que de ERROR al guardar en tabla HIJA y realice el rollback--
+Hibernate: select max(id) from items
+Hibernate: insert into items (acepta_mp, iditem, permalink, site_id, title, id) values (?, ?, ?, ?, ?, ?)
+Hibernate: select max(id) from NonMPPaymentMethods
+Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
+Hibernate: insert into NonMPPaymentMethods (description, iditem, idnonmp, type, id) values (?, ?, ?, ?, ?)
+Error en carga de datos: MLB657379875
+Hibernate: select * from ( select this_.id as id1_2_0_, this_.acepta_mp as acepta_mp2_2_0_, this_.iditem as iditem3_2_0_, this_.permalink as permalink4_2_0_, this_.site_id as site_id5_2_0_, this_.title as title6_2_0_ from items this_ where this_.iditem=? ) where rownum <= ?
+Hibernate: select max(id) from Logs
+Hibernate: insert into Logs (description, fecha, iditem, id) values (?, ?, ?, ?)
 ]]></system-out>
 
-      <system-err><![CDATA[--Output from test obtener datos en json de los items--
+      <system-err><![CDATA[--Output from test guardar en tabla los datos del json y que de ERROR al guardar en tabla HIJA y realice el rollback--
 ]]></system-err>
 
   </testsuite>

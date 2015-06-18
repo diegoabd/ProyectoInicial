@@ -3,7 +3,6 @@ package itemsconsumer2
  * Created by dabdala on 2/6/15.
  */
 class Items {
-
     String  iditem
     String  site_id
     String  title
