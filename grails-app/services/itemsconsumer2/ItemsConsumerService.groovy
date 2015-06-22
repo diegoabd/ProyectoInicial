@@ -11,11 +11,10 @@ class ItemsConsumerService{
     def delimitador = ","
     def itemsRepository
     def itemsClient
-    static transactional = false
+//    static transactional = false
 
 //servicio principal
-    public void executeProcesMessaje(def result)
-    {
+    public def executeProcesMessaje(def result){
         def items
 
         //obtener items del redis, ya separados por coma en una lista.
@@ -32,39 +31,12 @@ class ItemsConsumerService{
             def mapaItems = getJson(it)
             //guardar en tablas Items y nonMpPaymentMethods
             def respuesta = saveBase(mapaItems)
-            if (respuesta!=null){
-                saveError(mapaItems)
-            }
-        }
-    }
-
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
-    public void saveError(def mapaItems) {
-        def savedException
-        //manejar transaccion para realizar la insercion de datos en las tablas Items y nonMPPaymentsMethods
-        try {
-            Logs.withTransaction { tx ->
-                try{
-                    def error = [iditem: mapaItems.iditem, description: "ERROR DE ORACLE", fecha: "01/01/2010"]
-                    itemsRepository.saveError(error)
-                }catch(Throwable e){
-                    log.info "Processed error"
-                    savedException = e
-                    tx.setRollbackOnly()
-                }
-            }
-        } finally {
-            if(savedException){
-                println("Error guardado")
-            }else{
-                log.info "Processed correctly"
-            }
+            return respuesta
         }
     }
 
     public List<String> splitData(String jedis, String delimitador){
         def listaItems
-
         //separar los datos por el delimitador
         listaItems = jedis.split(delimitador)
 
@@ -80,43 +52,20 @@ class ItemsConsumerService{
         return mapaItems
     }
 
-    @Transactional(propagation = Propagation.REQUIRES_NEW)
+
     public def saveBase(def mapaItems){
-        def savedException
-        //manejar transaccion para realizar la insercion de datos en las tablas Items y nonMPPaymentsMethods
-        try {
-            Items.withTransaction { tx ->
-                try{
-                    //guardar datos en las tablas correspondientes (se maneja con un solo metodo porque tabla hija debe ser transaccionada con la tabla padre
-                    itemsRepository.saveItems(mapaItems)
-                }catch(Throwable e){
-                    log.info "Processed error"
-                    savedException = e
-                    tx.setRollbackOnly()
-                }
-            }
-        } finally {
-            if(savedException){
-                println("Error en carga de datos: " + mapaItems.iditem)
-                return savedException
-             }else{
-                println("Proceso Bien. IdItem: " + mapaItems.iditem)
-                log.info "Processed correctly"
-                return savedException
-                }
-            }
+        //guardar datos en las tablas correspondientes (se maneja con un solo metodo porque tabla hija debe ser transaccionada con la tabla padre
+        def ItemSaved = itemsRepository.saveItems(mapaItems)
+
+        return ItemSaved
     }
 
     public def getBase(String iditem){
         //validacion segun el resultado del guardado en la base
         def Items item
-        try {
-            item = itemsRepository.getItems(iditem)
-        }catch (Throwable e){
-            return null
-        }finally {
-            return item
-        }
+        item = itemsRepository.getItems(iditem)
+
+        return item
     }
 
 }
